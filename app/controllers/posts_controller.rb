@@ -3,7 +3,8 @@ class PostsController < ApplicationController
   before_action :set_target_post, only: %i[show edit update destroy]
 
   def index
-    @posts = Post.page(params[:page])
+    @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
+    @posts = @posts.page(params[:page])
   end
 
   def show
@@ -41,7 +42,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post.delete
+    @post.destroy
 
     redirect_to posts_path, flash: { notice: "「#{@post.title}」が削除されました"}
   end
@@ -49,7 +50,7 @@ class PostsController < ApplicationController
     private
 
       def post_params
-        params.require(:post).permit(:title, :price, :content)
+        params.require(:post).permit(:title, :price, :content, tag_ids: [])
       end
 
       def set_target_post
