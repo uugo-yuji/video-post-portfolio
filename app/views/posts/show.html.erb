@@ -1,5 +1,3 @@
-
-
 <div class="d-flex align-items-center mt-4 mb-4">
   <div class="ml-auto posts__linkBox">
     <%= link_to '一覧', posts_path, class: 'btn btn-outline-dark' %>
@@ -15,3 +13,9 @@
 <%
 =end%>
 <%= render @post %>
+<div class="p-comment__list">
+  <div class="p-comment_listTitle">コメント</div>
+  <%= render @post.comments %>
+</div>
+
+<%= render partial: 'comments/form', locals: { comment: @comment } %>

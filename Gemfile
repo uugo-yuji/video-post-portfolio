@@ -34,6 +34,8 @@ group :development, :test do
   # RSpecTest
   gem "rspec-rails"
   gem "factory_bot_rails"
+  #
+  gem 'rails-flog', require: 'flog'
 end
 
 group :development do
