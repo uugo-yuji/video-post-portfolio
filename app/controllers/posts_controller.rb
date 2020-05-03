@@ -7,6 +7,7 @@ class PostsController < ApplicationController
   end
 
   def show
+    @comment = Comment.new(post_id: @post.id)
   end
 
   def new
@@ -30,9 +31,13 @@ class PostsController < ApplicationController
   end
 
   def update
-    post.update(post_params)
-
-    redirect_to post
+    if @post.update(post_params)
+        redirect_to @post
+    else
+      flash[:post] = @post
+      flash[:error_messages] = @post.errors.full_messages
+      redirect_back(fallback_location: @post)
+    end
   end
 
   def destroy
