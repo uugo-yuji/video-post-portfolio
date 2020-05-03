@@ -1,0 +1,36 @@
+<div class="d-flex align-items-center">
+  <h1>掲示板一覧</h1>
+  <div class="ml-auto posts__linkBox">
+    <%= link_to '新規作成', new_post_path, class: 'btn btn-outline-dark' %>
+  </div>
+</div>
+<% if flash[:notice] %>
+  <div class="alert alert-danger"><%= flash[:notice] %></div>
+<% end %>
+<table class="table table-hover posts__table">
+  <thead class="thead-dark">
+    <tr>
+      <th>ID</th>
+      <th>タイトル</th>
+      <th>金額</th>
+      <th>作成日時</th>
+      <th>更新日時</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @posts.each do |post| %>
+    <tr>
+      <td><%= post.id %></td>
+      <td><%= post.title %></td>
+      <td><%= post.price %></td>
+      <td><%= post.created_at.to_s(:datetime_jp) %></td>
+      <td><%= post.updated_at.to_s(:datetime_jp) %></td>
+      <td><%= link_to '詳細', post, class: 'btn btn-outline-dark' %></td>
+      <td><%= link_to '削除', post, class: 'btn btn-outline-dark', method: :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= paginate @posts %>
