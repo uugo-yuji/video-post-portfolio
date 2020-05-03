@@ -1,0 +1,15 @@
+ja:
+  activerecord:
+    attributes:
+      post:
+        title: タイトル
+        price: 金額
+        content: 本文
+        video: 動画
+  views:
+    pagination:
+      first: 最初
+      last: 最後
+      previous: 前
+      next: 次
+      truncate: '...'
