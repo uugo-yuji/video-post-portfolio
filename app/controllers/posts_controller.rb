@@ -50,7 +50,7 @@ class PostsController < ApplicationController
     private
 
       def post_params
-        params.require(:post).permit(:title, :price, :content, tag_ids: [])
+        params.require(:post).permit(:title, :content, tag_ids: [])
       end
 
       def set_target_post

@@ -22,7 +22,7 @@
     <tr>
       <th>ID</th>
       <th>タイトル</th>
-      <th>金額</th>
+      <th>本文</th>
       <th>作成日時</th>
       <th>更新日時</th>
       <th></th>
@@ -34,7 +34,7 @@
     <tr>
       <td><%= post.id %></td>
       <td><%= post.title %></td>
-      <td><%= post.price %></td>
+      <td><%= post.content %></td>
       <td><%= post.created_at.to_s(:datetime_jp) %></td>
       <td><%= post.updated_at.to_s(:datetime_jp) %></td>
       <td><%= link_to '詳細', post, class: 'btn btn-outline-dark' %></td>
@@ -42,5 +42,17 @@
     </tr>
   <% end %>
 </table>
+
+<div class="card mb-3">
+  <% @posts.each do |post| %>
+  <hr>
+  <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image cap"><title><%= post.title %></title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
+  <div class="card-body">
+    <h5 class="card-title"><%= post.title %></h5>
+    <p class="card-text"><%= post.content %></p>
+    <p class="card-text"><small class="text-muted"><%= post.created_at.to_s(:datetime_jp) %></small></p>
+  </div>
+  <% end %>
+</div>
 
 <%= paginate @posts %>
