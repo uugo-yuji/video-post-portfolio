@@ -6,6 +6,9 @@
     <%= f.text_field :title, class: 'form-control' %>
   </div>
   <div class="form-group">
+    <%= f.file_field :video, accept: 'image/jpeg,image/gif,image/png,video/*' %>
+  </div>
+  <div class="form-group">
     <%= f.label :content, '本文' %>
     <%= f.text_area :content, class: 'form-control', row: 10 %>
   </div>

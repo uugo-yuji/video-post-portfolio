@@ -49,7 +49,14 @@
       <h5 class="card-title"><%= post.title %></h5>
       <%= post.user.email %>
       <p class="card-text"><small class="text-muted">更新日時<%= post.updated_at.to_s(:datetime_jp) %></small></p>
-    <svg class="bd-placeholder-img card-img-top" width="100%" height="300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image cap"><title><%= post.title %></title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
+      <% if post.video? %>
+        <% if post.video.file.content_type.include?('image/') %>
+          <%= image_tag  post.video.url(:thumb) %>
+        <% else %>
+          <%= video_tag post.video.url, width: "30%", height: "30%", 
+                  controls: true, autobuffer: true %>
+        <% end %>
+      <% end %>
     <div class="card-body">
       <p class="card-text"><%= post.content %></p>
       <hr>
