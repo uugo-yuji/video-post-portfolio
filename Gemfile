@@ -70,3 +70,7 @@ gem 'devise-i18n-views'
 gem 'kaminari'
 #日本語化
 gem 'rails-i18n'
+
+# 画像、動画
+gem 'carrierwave'
+gem 'mini_magick'
