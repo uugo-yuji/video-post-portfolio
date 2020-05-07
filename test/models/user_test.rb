@@ -15,6 +15,7 @@
 #  last_sign_in_ip        :string(255)
 #  locked_at              :datetime
 #  name                   :string(255)      default(""), not null
+#  profile                :text(65535)
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string(255)

@@ -1,0 +1,30 @@
+<h1>Users#show</h1>
+<p>Find me in app/views/users/show.html.erb</p>
+<p>名前： <%= @user.name %></p>
+<p>メールアドレス： <%= @user.email %></p>
+<p>プロフィール： <%= @user.profile %></p>
+
+<p>投稿一覧</p>
+<% @posts.each do |post| %>
+  <div class="card mb-3 mx-auto" style="width: 600px;">
+  <div class="card-header">
+    <h4><%= post.title %></h4>
+    <p class="font-weight-bold mr-10"><%= post.user.name %></p>
+    <p class="card-text"><small class="text-muted">更新日時<%= post.updated_at.to_s(:datetime_jp) %></small></p>
+    <% post.tags.each do |tag| %>
+      <span class="badge badge-primary"><%= tag.name %></span>
+    <% end %>
+  </div>
+  <div class="card-body">
+      <% if post.video? %>
+        <% if post.video.file.content_type.include?('image/') %>
+          <%= image_tag  post.video.url(:thumb) %>
+        <% else %>
+          <%= video_tag post.video.url, width: "100%", height: "60%",
+                  controls: true, autobuffer: true %>
+        <% end %>
+      <% end %>
+    <p class="card-text"><%= simple_format(post.content) %></p>
+  </div>
+</div>
+<% end %>
