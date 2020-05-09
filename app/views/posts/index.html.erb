@@ -17,36 +17,13 @@
 <% if flash[:notice] %>
   <div class="alert alert-danger"><%= flash[:notice] %></div>
 <% end %>
-<table class="table table-hover posts__table">
-  <thead class="thead-dark">
-    <tr>
-      <th>ID</th>
-      <th>タイトル</th>
-      <th>本文</th>
-      <th>作成日時</th>
-      <th>更新日時</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-  <% @posts.each do |post| %>
-    <tr>
-      <td><%= post.id %></td>
-      <td><%= post.title %></td>
-      <td><%= post.content %></td>
-      <td><%= post.created_at.to_s(:datetime_jp) %></td>
-      <td><%= post.updated_at.to_s(:datetime_jp) %></td>
-      <td><%= link_to '詳細', post, class: 'btn btn-outline-dark' %></td>
-      <td><%= link_to '削除', post, class: 'btn btn-outline-dark', method: :delete %></td>
-    </tr>
-  <% end %>
-</table>
+
 
 <% @posts.each do |post| %>
   <div class="card mb-3 mx-auto" style="width: 600px;">
     <hr>
       <h5 class="card-title"><%= link_to "#{post.title}", post %></h5>
+
       <div class="media">
         <% if post.user.avatar.attached? %>
             <p><%= image_tag(rails_blob_path(post.user.avatar),:size => "50x50") %></p>
@@ -57,6 +34,8 @@
           <h5 class="mt-0"><%= post.user.email %></h5>
         </div>
       </div>
+      <%= post.user.name %>
+
       <p class="card-text"><small class="text-muted">更新日時<%= post.updated_at.to_s(:datetime_jp) %></small></p>
       <% if post.video? %>
         <% if post.video.file.content_type.include?('image/') %>

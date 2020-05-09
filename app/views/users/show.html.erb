@@ -25,6 +25,9 @@
         <% end %>
       <% end %>
     <p class="card-text"><%= simple_format(post.content) %></p>
+    <hr>
+      <%= link_to '詳細', post, class: 'btn btn-outline-dark' %>
+      <%= link_to '削除', post, class: 'btn btn-outline-dark', method: :delete %>
   </div>
 </div>
 <% end %>
