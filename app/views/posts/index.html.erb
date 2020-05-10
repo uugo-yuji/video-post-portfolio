@@ -11,9 +11,17 @@
                     }
       %>
     <% end %>
-    <%= link_to '新規作成', new_post_path, class: 'btn btn-outline-dark' %>
   </div>
 </div>
+
+<div class="container">
+  <div class="row">
+    <div class="mb-3 mx-auto">
+      <%= link_to '質問する', new_post_path, class: 'btn btn-outline-dark btn-block question-btn' %>
+    </div>
+  </div>
+</div>
+
 <% if flash[:notice] %>
   <div class="alert alert-danger"><%= flash[:notice] %></div>
 <% end %>
