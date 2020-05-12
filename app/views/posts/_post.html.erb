@@ -2,8 +2,8 @@
   <div class="card-header">
     <h4><%= post.title %></h4>
     <p class="font-weight-bold mr-10"><%= post.user.email %></p>
-    <% post.tags.each do |tag| %>
-      <span class="badge badge-primary"><%= tag.name %></span>
+    <% post.categories.each do |category| %>
+      <span class="badge badge-primary"><%= category.name %></span>
     <% end %>
   </div>
   <div class="card-body">
