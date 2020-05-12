@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_action :set_target_post, only: %i[show edit update destroy]
 
   def index
-    @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all.order(created_at: :desc)
+    @posts = params[:category_id].present? ? Category.find(params[:category_id]).posts : Post.all.order(created_at: :desc)
     @posts = @posts.page(params[:page])
   end
 
@@ -50,7 +50,7 @@ class PostsController < ApplicationController
     private
 
       def post_params
-        params.require(:post).permit(:title, :content, :video, tag_ids: [])
+        params.require(:post).permit(:title, :content, :video, category_ids: [])
       end
 
       def set_target_post
