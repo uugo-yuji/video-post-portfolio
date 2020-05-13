@@ -1,7 +1,7 @@
   <div class="card mb-3 mx-auto" style="width: 600px;">
   <div class="card-header">
     <h4><%= post.title %></h4>
-    <p class="font-weight-bold mr-10"><%= post.user.email %></p>
+    <p class="font-weight-bold mr-10"><%= post.user.name %></p>
     <% post.categories.each do |category| %>
       <span class="badge badge-primary"><%= category.name %></span>
     <% end %>
