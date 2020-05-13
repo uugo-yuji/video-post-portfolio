@@ -5,6 +5,7 @@ class PostsController < ApplicationController
   def index
     @posts = params[:category_id].present? ? Category.find(params[:category_id]).posts : Post.all.order(created_at: :desc)
     @posts = @posts.page(params[:page])
+    @categories = Category.all
   end
 
   def show
@@ -45,6 +46,10 @@ class PostsController < ApplicationController
     @post.destroy
 
     redirect_to posts_path, flash: { notice: "「#{@post.title}」が削除されました"}
+  end
+
+  def category
+    @categories = Category.all
   end
 
     private

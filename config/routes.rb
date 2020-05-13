@@ -18,4 +18,5 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
   resources :posts
   resources :comments, only: %i[create destroy]
+  resources :categorys, only: [:index, :show]
 end
