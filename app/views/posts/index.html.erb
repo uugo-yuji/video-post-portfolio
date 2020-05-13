@@ -29,7 +29,12 @@
 
 <% @posts.each do |post| %>
   <div class="card mb-3 mx-auto" style="width: 600px;">
+    <div class="card-header">
     <hr>
+      <% post.categories.each do |category| %>
+        <span class="badge badge-primary"><%= category.name %></span>
+      <% end %>
+
       <h5 class="card-title"><%= link_to "#{post.title}", post %></h5>
 
       <div class="media">
@@ -39,12 +44,12 @@
             <p><%= image_tag("default_profile_image.jpg", :size => "50x50") %></p>
           <% end %>
         <div>
-          <h5 class="mt-0"><%= post.user.email %></h5>
+          <h5 class="mt-0"><%= post.user.name %></h5>
+          <p class="card-text"><small class="text-muted">更新日時<%= post.updated_at.to_s(:datetime_jp) %></small></p>
+        </div>
         </div>
       </div>
-      <%= post.user.name %>
 
-      <p class="card-text"><small class="text-muted">更新日時<%= post.updated_at.to_s(:datetime_jp) %></small></p>
       <% if post.video? %>
         <% if post.video.file.content_type.include?('image/') %>
           <%= image_tag post.video.url(:thumb) %>
