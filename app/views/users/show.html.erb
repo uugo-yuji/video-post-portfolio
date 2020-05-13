@@ -12,8 +12,8 @@
     <h4><%= post.title %></h4>
     <p class="font-weight-bold mr-10"><%= post.user.name %></p>
     <p class="card-text"><small class="text-muted">更新日時<%= post.updated_at.to_s(:datetime_jp) %></small></p>
-    <% post.categories.each do |category| %>
-      <span class="badge badge-primary"><%= category.name %></span>
+    <% post.tags.each do |tag| %>
+      <span class="badge badge-primary"><%= tag.name %></span>
     <% end %>
   </div>
   <div class="card-body">
