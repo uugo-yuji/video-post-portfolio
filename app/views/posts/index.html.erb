@@ -14,6 +14,10 @@
   </div>
 </div>
 
+<% @categories.each do |category| %>
+  <p><%= link_to "#{category.name}", category_path(category), id: category.id %></p>
+<% end %>
+
 <div class="container">
   <div class="row">
     <div class="mb-3 mx-auto">

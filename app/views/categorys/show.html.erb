@@ -1,0 +1,24 @@
+<h1>Categorys#show</h1>
+<p>Find me in app/views/categorys/show.html.erb</p>
+<% @posts.each do |post| %>
+  <div class="card mb-3 mx-auto" style="width: 600px;">
+  <div class="card-header">
+    <h4><%= post.title %></h4>
+    <p class="font-weight-bold mr-10"><%= post.user.name %></p>
+    <% post.categories.each do |category| %>
+      <span class="badge badge-primary"><%= category.name %></span>
+    <% end %>
+  </div>
+  <div class="card-body">
+      <% if post.video? %>
+        <% if post.video.file.content_type.include?('image/') %>
+          <%= image_tag  post.video.url(:thumb) %>
+        <% else %>
+          <%= video_tag post.video.url, width: "100%", height: "60%",
+                  controls: true, autobuffer: true %>
+        <% end %>
+      <% end %>
+    <p class="card-text"><%= simple_format(post.content) %></p>
+  </div>
+</div>
+<% end %>
