@@ -3,6 +3,13 @@
 <p>名前： <%= @user.name %></p>
 <p>メールアドレス： <%= @user.email %></p>
 <p>プロフィール： <%= @user.profile %></p>
+
+<h3>ブックマークしている投稿</h3>
+<% @user.bookmarked_posts.each do |post| %>
+  <%= post.user.name %>
+  <%= post.title %>
+<% end %>
+
 <%= link_to 'プロフィール変更', edit_user_registration_path %>
 
 <p>投稿一覧</p>

@@ -67,6 +67,9 @@
             <% end %>
           <div class="card-body">
             <p class="card-text"><%= post.content %></p>
+            <div>
+              (<%= post.bookmarked_users.count %>)
+            </div>
             <hr>
             <%= link_to '詳細', post, class: 'btn btn-outline-dark' %>
           </div>

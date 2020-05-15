@@ -24,9 +24,16 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :post_category_relations
   has_many :categories, through: :post_category_relations
+  has_many :bookmarks
+  has_many :bookmarked_users, through: :bookmarks, source: :user
   
   validates :title, presence: true, length: { maximum: 30}
   validates :content, presence: true, length: { maximum: 1000}
 
   mount_uploader :video, VideoAndImageUploader
+
+  # post,bookmarkの判定
+  def bookmark_by?(user)
+    bookmarks.where(user_id: user.id).exists?
+  end
 end
