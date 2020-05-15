@@ -16,5 +16,16 @@
         <% end %>
       <% end %>
     <p class="card-text"><%= simple_format(post.content) %></p>
+
+    <p>ブックマーク件数: <%= post.bookmarks.count %></p>
+    <% if current_user.already_bookmarked?(post) %>
+      <%= button_to 'ブックマークを取り消す', post_bookmarks_path(post), method: :delete %>
+    <% else %>
+      <%= button_to 'ブックマーク', post_bookmarks_path(post) %>
+    <% end %>
+    <p>ブックマークしたユーザ</p>
+    <% post.bookmarked_users.each do |user| %>
+      <li><%= user.name %></li>
+    <% end %>
   </div>
 </div>

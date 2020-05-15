@@ -6,10 +6,12 @@ class PostsController < ApplicationController
     @posts = params[:category_id].present? ? Category.find(params[:category_id]).posts : Post.all.order(created_at: :desc)
     @posts = @posts.page(params[:page])
     @categories = Category.all
+    @bookmark = Bookmark.new
   end
 
   def show
     @comment = Comment.new(post_id: @post.id)
+    @bookmark = Bookmark.new
   end
 
   def new

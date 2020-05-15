@@ -41,6 +41,12 @@ class User < ApplicationRecord
 
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
+  has_many :bookmarked_posts, through: :bookmarks, source: :post
 
   has_one_attached :avatar
+
+  def already_bookmarked?(post)
+    self.bookmarks.exists?(post_id: post.id)
+  end
 end
