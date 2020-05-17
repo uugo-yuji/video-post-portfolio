@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_target_post, only: %i[show edit update destroy]
+  before_action :set_target_post, only: %i[show edit update destroy toggle_status]
 
   def index
     @posts = params[:category_id].present? ? Category.find(params[:category_id]).posts : Post.all.order(created_at: :desc)
@@ -54,6 +54,11 @@ class PostsController < ApplicationController
     @categories = Category.all
   end
 
+  def toggle_status
+    @post.toggle_status!
+    redirect_to @post, notice: '更新しました'
+  end
+
     private
 
       def post_params
@@ -61,6 +66,6 @@ class PostsController < ApplicationController
       end
 
       def set_target_post
-        @post = Post.find(params[:id])
+        @post = Post.find(params[:id] || params[:post_id])
       end
 end

@@ -5,6 +5,7 @@
 #  id         :bigint           not null, primary key
 #  content    :string(255)
 #  price      :string(255)
+#  status     :boolean          default(FALSE), not null
 #  title      :string(255)
 #  video      :string(255)
 #  created_at :datetime         not null
@@ -36,4 +37,15 @@ class Post < ApplicationRecord
   def bookmark_by?(user)
     bookmarks.where(user_id: user.id).exists?
   end
+
+    # enumでの未解決or解決済
+    enum status: { unfixed: false, resolved: true}
+    # eunmでの切り替え用メソッド
+    def toggle_status!
+      if unfixed?
+        resolved!
+      else
+        unfixed!
+      end
+    end
 end

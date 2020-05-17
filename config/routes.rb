@@ -17,8 +17,9 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show]
   resources :posts, shallow: true do
+    patch :toggle_status
     resource :bookmarks, only: [:create, :destroy]
   end
-  resources :comments, only: %i[create destroy]
+  resources :comments, only: [:create, :destroy]
   resources :categorys, only: [:index, :show]
 end

@@ -5,6 +5,7 @@
 #  id         :bigint           not null, primary key
 #  content    :string(255)
 #  price      :string(255)
+#  status     :boolean          default(FALSE), not null
 #  title      :string(255)
 #  video      :string(255)
 #  created_at :datetime         not null
