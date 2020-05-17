@@ -27,5 +27,7 @@
     <% post.bookmarked_users.each do |user| %>
       <li><%= user.name %></li>
     <% end %>
+    <strong>Status:</strong>
+    <%= link_to post.status_i18n, post_toggle_status_path(post), method: :patch %>
   </div>
 </div>
