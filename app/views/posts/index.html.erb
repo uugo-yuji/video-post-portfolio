@@ -17,7 +17,7 @@
 <div class="container">
   <div class="row">
     <div class="mb-3 mx-auto">
-      <%= link_to '質問する', new_post_path, class: 'btn btn-outline-dark btn-block question-btn' %>
+      <%= link_to '質問する', new_post_path, class: 'btn btn-outline-success btn-block question-btn' %>
     </div>
   </div>
 </div>
@@ -29,9 +29,7 @@
 <div class="container">
   <div class="row">
     <div class="col-sm">
-      <% @categories.each do |category| %>
-        <p><%= link_to "#{category.name}", category_path(category), id: category.id %></p>
-      <% end %>
+      <%= render 'categorys/category_list' %>
     </div>
     <div class="col-sm">
           <% @posts.each do |post| %>
@@ -39,10 +37,11 @@
           <div class="card-header">
           <hr>
             <% post.categories.each do |category| %>
-              <span class="badge badge-primary"><%= category.name %></span>
+              <small class="text-muted"><%= category.name %></small>
             <% end %>
 
-            <h5 class="card-title"><%= link_to "#{post.title}", post %></h5>
+            <h5 class="card-title"><%= link_to "#{post.title}", post, :style=>"color: black;" %></h5>
+            <small class="text-muted">更新日時<%= post.updated_at.to_s(:datetime_jp) %></small>
 
             <div class="media">
               <% if post.user.avatar.attached? %>
@@ -52,7 +51,6 @@
                 <% end %>
               <div>
                 <h5 class="mt-0"><%= post.user.name %></h5>
-                <p class="card-text"><small class="text-muted">更新日時<%= post.updated_at.to_s(:datetime_jp) %></small></p>
               </div>
               </div>
             </div>

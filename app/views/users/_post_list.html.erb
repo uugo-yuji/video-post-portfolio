@@ -1,0 +1,11 @@
+<% @user.bookmarked_posts.each do |post| %>
+  <ul class="list-group" style="max-width: 400px">
+    <li class="list-group-item">
+      <% post.categories.each do |category| %>
+        <p class="text-black-50"><%= category.name %></p>
+      <% end %>
+        <%= link_to "#{post.title.truncate(20)}", post %><br>
+        <span><i class="far fa-comment"></i></span><%= post.comments.count %>
+    </li>
+  </ul>
+<% end %>
