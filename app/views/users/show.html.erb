@@ -1,41 +1,86 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
-<p>名前： <%= @user.name %></p>
-<p>メールアドレス： <%= @user.email %></p>
-<p>プロフィール： <%= @user.profile %></p>
-
-<h3>ブックマークしている投稿</h3>
-<% @user.bookmarked_posts.each do |post| %>
-  <%= post.user.name %>
-  <%= post.title %>
-<% end %>
-
-<%= link_to 'プロフィール変更', edit_user_registration_path %>
-
-<p>投稿一覧</p>
-<% @posts.each do |post| %>
-  <div class="card mb-3 mx-auto" style="width: 600px;">
-  <div class="card-header">
-    <h4><%= post.title %></h4>
-    <p class="font-weight-bold mr-10"><%= post.user.name %></p>
-    <p class="card-text"><small class="text-muted">更新日時<%= post.updated_at.to_s(:datetime_jp) %></small></p>
-    <% post.categories.each do |category| %>
-      <span class="badge badge-primary"><%= category.name %></span>
-    <% end %>
-  </div>
-  <div class="card-body">
-      <% if post.video? %>
-        <% if post.video.file.content_type.include?('image/') %>
-          <%= image_tag  post.video.url(:thumb) %>
+<div class="container">
+  <div>
+    <div class="media">
+      <% if @user.avatar.attached? %>
+          <p><%= image_tag(rails_blob_path(@user.avatar), :size => "50x50", :class => "rounded-circle") %></p>
         <% else %>
-          <%= video_tag post.video.url, width: "100%", height: "60%",
-                  controls: true, autobuffer: true %>
+          <p><%= image_tag("default_profile_image.jpg", :size => "50x50", :class => "rounded-circle") %></p>
         <% end %>
-      <% end %>
-    <p class="card-text"><%= simple_format(post.content) %></p>
+      <div>
+    <p>名前： <strong><%= @user.name %></strong></p>
+    <p>メールアドレス： <%= @user.email %></p>
+    <p>プロフィール： <%= @user.profile %></p>
+
+
+    <%= link_to 'プロフィール変更', edit_user_registration_path %>
+
+
     <hr>
-      <%= link_to '詳細', post, class: 'btn btn-outline-dark' %>
-      <%= link_to '削除', post, class: 'btn btn-outline-dark', method: :delete %>
+    <!-- タブ部分 -->
+    <ul id="myTab" class="nav nav-tabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <a href="#home" id="home-tab" class="nav-link active" role="tab" data-toggle="tab" aria-controls="home" aria-selected="true">投稿一覧</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a href="#profile" id="profile-tab" class="nav-link" role="tab" data-toggle="tab" aria-controls="profile" aria-selected="false">ブックマーク</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a href="#comment" id="comment-tab" class="nav-link" role="tab" data-toggle="tab" aria-controls="comment" aria-selected="false">コメント</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a href="#unfixed" id="unfixed-tab" class="nav-link" role="tab" data-toggle="tab" aria-controls="unfixed" aria-selected="false">募集中</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a href="#resolved" id="resolved-tab" class="nav-link" role="tab" data-toggle="tab" aria-controls="resolved" aria-selected="false">解決済</a>
+      </li>
+    </ul>
+
+    <!-- パネル部分 -->
+    <div id="myTabContent" class="tab-content mt-3">
+      <div id="home" class="tab-pane active" role="tabpanel" aria-labelledby="home-tab">
+      <p>投稿一覧</p>
+        <%= render partial: 'post', collection: @posts, as: :post %>
+    </div>
+      <div id="profile" class="tab-pane" role="tabpanel" aria-labelledby="profile-tab">
+        <p>ブックマークしている投稿</p>
+        <%= render 'post_list' %>
+      </div>
+      <div id="comment" class="tab-pane" role="tabpanel" aria-labelledby="comment-tab">
+      <p>コメントした投稿</p>
+        <%= render 'post_list' %>
+      </div>
+      <div id="unfixed" class="tab-pane" role="tabpanel" aria-labelledby="unfixed-tab">
+        <p>募集中</p>
+        <% @user.posts.each do |post| %>
+          <% if post.unfixed? %>
+          <ul class="list-group" style="max-width: 400px">
+            <li class="list-group-item">
+              <% post.categories.each do |category| %>
+                <p class="text-black-50"><%= category.name %></p>
+              <% end %>
+                <%= link_to "#{post.title.truncate(20)}", post %><br>
+                <span><i class="far fa-comment"></i></span><%= post.comments.count %>
+            </li>
+          </ul>
+          <% end %>
+        <% end %>
+      </div>
+      <div id="resolved" class="tab-pane" role="tabpanel" aria-labelledby="resolved-tab">
+        <p>解決済み</p>
+        <% @user.posts.each do |post| %>
+          <% if post.resolved? %>
+          <ul class="list-group" style="max-width: 400px">
+            <li class="list-group-item">
+              <% post.categories.each do |category| %>
+                <p class="text-black-50"><%= category.name %></p>
+              <% end %>
+                <%= link_to "#{post.title.truncate(20)}", post %><br>
+                <span><i class="far fa-comment"></i></span><%= post.comments.count %>
+            </li>
+          </ul>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
-<% end %>
