@@ -36,7 +36,9 @@ body {
 <div class="container">
   <div class="row">
     <div class="col-sm">
-      <%= render 'categorys/category_list' %>
+      <div class="sticky-item">
+        <%= render 'categorys/category_list' %>
+      </div>
     </div>
     <div class="col-sm">
       <% @posts.each do |post| %>

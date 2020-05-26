@@ -9,7 +9,7 @@
 
   <div class="col-sm">
     <div class="card" style="width: 600px;">
-      <h5 class="card-header">おすすめの質問</h5>
+      <h5 class="card-header"><i class="fas fa-chess-queen"></i> おすすめの質問</h5>
       <% @posts.each do |post| %>
       <div class="card-body">
         <% post.categories.each do |category| %>
@@ -23,9 +23,20 @@
           <%= link_to(post_path(post), class: 'btn btn-white rounded-pill') do %>
             <i class="fas fa-pen-square answer-blue answer-large"></i> 回答する
           <% end %>
+
+          <div class="btn-group" style="float: right;">
+            <button type="button" class="btn btn-white dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-ellipsis-h"></i>
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">a</a>
+              <a class="dropdown-item" href="#">a</a>
+              <a class="dropdown-item" href="#">a</a>
+            </div>
+          </div>
+
         </div>
-        <div>
-          <i class="fas fa-ellipsis-h"></i>
+        <div style="float: right;">
         </div>
       </div><hr>
       <% end %>
