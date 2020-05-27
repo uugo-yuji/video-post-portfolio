@@ -21,6 +21,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Post < ApplicationRecord
+  # RSpecでファクトリを使いテストデータを作成する為aliasを記述
   belongs_to :user
   has_many :comments, dependent: :destroy
   has_many :post_category_relations
