@@ -30,7 +30,7 @@ class Post < ApplicationRecord
   has_many :bookmarked_users, through: :bookmarks, source: :user
   
   validates :title, presence: true, length: { maximum: 30}
-  validates :content, presence: true, length: { maximum: 1000}
+  validates :content, length: { maximum: 1000}
 
   mount_uploader :video, VideoAndImageUploader
 
