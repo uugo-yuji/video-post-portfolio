@@ -20,7 +20,7 @@
 #
 FactoryBot.define do
   factory :post_category_relation do
-    post { nil }
-    category { nil }
+    association :post
+    association :category
   end
 end
