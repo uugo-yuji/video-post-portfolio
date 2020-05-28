@@ -22,5 +22,36 @@
 require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:user) { FactoryBot.create(:user) }
+  let(:post) { FactoryBot.create(:post) }
+
+  # 有効なファクトリを持つこと
+  it "has a valid factory" do
+    expect(FactoryBot.build(:post)).to be_valid
+  end
+
+  # コメント,ユーザid,ポストidがあれば有効なこと
+  it "is valid with a user, project, and message" do
+    comment = Comment.new(
+      comment: "SampleComment",
+      user: user,
+      post: post,
+    )
+    expect(comment).to be_valid
+  end
+
+
+  # コメントがなければ無効なこと
+  it "is invalid without a comment" do
+    comment = FactoryBot.build(:comment, comment: nil)
+    comment.valid?
+    expect(comment.errors.added?(:comment, :blank)).to be_truthy
+  end
+
+  # コメント1000文字以上なら無効なこと
+  it "is invalid without a a more comment" do
+    comment = FactoryBot.build(:comment, comment: 'a' * 1001)
+    comment.valid?
+    expect(comment.errors[:comment]).to include("は1000文字以内で入力してください")
+  end
 end
