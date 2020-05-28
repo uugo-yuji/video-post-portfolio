@@ -49,7 +49,7 @@ RSpec.describe Comment, type: :model do
   end
 
   # コメント1000文字以上なら無効なこと
-  it "is invalid without a a more comment" do
+  it "is invalid without a more comment" do
     comment = FactoryBot.build(:comment, comment: 'a' * 1001)
     comment.valid?
     expect(comment.errors[:comment]).to include("は1000文字以内で入力してください")
