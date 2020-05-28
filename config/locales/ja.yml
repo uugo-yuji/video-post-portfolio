@@ -8,6 +8,8 @@ ja:
         video: 動画
       comment:
         comment: コメント
+      category:
+        name: カテゴリ
   views:
     pagination:
       first: 最初
